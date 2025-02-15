@@ -1,0 +1,23 @@
+name: Run PHP code style checks
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.php'
+
+jobs:
+  php-code-styling:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Check PHP code style issues
+        uses: aglipanci/laravel-pint-action@2.5
+        with:
+          testMode: true
