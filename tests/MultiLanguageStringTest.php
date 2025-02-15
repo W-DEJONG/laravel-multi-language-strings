@@ -6,7 +6,7 @@ it('Can instantiate a MultiLanguageString', function () {
     $langStr = new MultiLanguageString('Hello World!');
     expect($langStr)
         ->toBeInstanceOf(MultiLanguageString::class)
-        ->and((string)$langStr)
+        ->and((string) $langStr)
         ->toBe('Hello World!')
         ->and($langStr->getUsedLocale())
         ->toBe('en');
@@ -64,7 +64,7 @@ it('Can set the default use of a fallback locale', function () {
     expect(MultiLanguageString::getUseFallBackLocaleDefault())
         ->toBeFalse();
 
-    $langStr = new MultiLanguageString();
+    $langStr = new MultiLanguageString;
     expect($langStr->getUseFallbackLocale())
         ->toBeFalse();
 
@@ -74,7 +74,7 @@ it('Can set the default use of a fallback locale', function () {
 
     MultiLanguageString::setUseFallBackLocaleDefault(true);
 
-    $langStr = new MultiLanguageString();
+    $langStr = new MultiLanguageString;
     expect($langStr->getUseFallbackLocale())
         ->toBeTrue();
 

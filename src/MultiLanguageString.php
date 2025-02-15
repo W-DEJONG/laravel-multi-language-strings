@@ -42,7 +42,7 @@ class MultiLanguageString implements Stringable
     public function getUsedLocale(?string $locale = null): string
     {
         $locale = $locale ?? app()->getLocale();
-        if (!array_key_exists($locale, $this->values) && $this->fallback) {
+        if (! array_key_exists($locale, $this->values) && $this->fallback) {
             $locale = app()->getFallbackLocale();
         }
 
@@ -90,7 +90,7 @@ class MultiLanguageString implements Stringable
     private function isKeyValueArray(array $array): bool
     {
         foreach (array_keys($array) as $key) {
-            if (!is_string($key)) {
+            if (! is_string($key)) {
                 return false;
             }
         }
