@@ -1,4 +1,4 @@
-# MultiLanguageStr package
+# Laravel Multi Language strings package
 Laravel Package that adds a Multilanguage string class and an Attribute cast for adding language support to Models.
 
 ## Use in Models
