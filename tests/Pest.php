@@ -1,3 +1,5 @@
 <?php
 
-uses(Orchestra\Testbench\TestCase::class)->in(__DIR__);
+use DeJoDev\Tests\TestCase;
+
+uses(TestCase::class)->in(__DIR__);

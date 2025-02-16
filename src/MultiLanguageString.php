@@ -5,7 +5,7 @@ namespace DeJoDev\MultiLanguageStrings;
 use InvalidArgumentException;
 use Stringable;
 
-class MultiLanguageString implements Stringable
+final class MultiLanguageString implements Stringable
 {
     protected static bool $useFallbackLocale = true;
 
@@ -15,8 +15,27 @@ class MultiLanguageString implements Stringable
 
     public function __construct(string|array $value = [], ?bool $useFallbackLocale = null)
     {
-        $this->fallback = is_null($useFallbackLocale) ? static::$useFallbackLocale : $useFallbackLocale;
+        $this->fallback = is_null($useFallbackLocale) ? self::$useFallbackLocale : $useFallbackLocale;
         $this->set($value);
+    }
+
+    public static function fromJson(string $json): static
+    {
+        if (empty($json)) {
+            return new self;
+        }
+
+        $values = json_decode($json, true);
+        if ($values = $values['multi-lang'] ?? null) {
+            return new self($values);
+        }
+
+        throw new InvalidArgumentException('Invalid MultiLanguageString JSON');
+    }
+
+    public function toJson(): string
+    {
+        return json_encode(['multi-lang' => $this->values]);
     }
 
     public static function setUseFallBackLocaleDefault(bool $enable): void
@@ -79,7 +98,7 @@ class MultiLanguageString implements Stringable
 
     public function toString(): string
     {
-        return $this->get();
+        return $this->get() ?? '';
     }
 
     public function __toString(): string
