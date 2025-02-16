@@ -3,6 +3,7 @@
 namespace Workbench\App\Models;
 
 use DeJoDev\MultiLanguageStrings\Casts\MultiLanguageStringCast;
+use DeJoDev\MultiLanguageStrings\MultiLanguageString;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -15,7 +16,7 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'productName' => MultiLanguageStringCast::class,
+        'productName' => MultiLanguageString::class,
         'productDescription' => MultiLanguageStringCast::class,
     ];
 }

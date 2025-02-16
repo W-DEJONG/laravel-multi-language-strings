@@ -2,10 +2,12 @@
 
 namespace DeJoDev\MultiLanguageStrings;
 
+use DeJoDev\MultiLanguageStrings\Casts\MultiLanguageStringCast;
+use Illuminate\Contracts\Database\Eloquent\Castable;
 use InvalidArgumentException;
 use Stringable;
 
-final class MultiLanguageString implements Stringable
+final class MultiLanguageString implements Castable, Stringable
 {
     protected static bool $useFallbackLocale = true;
 
@@ -36,6 +38,16 @@ final class MultiLanguageString implements Stringable
     public function toJson(): string
     {
         return json_encode(['multi-lang' => $this->values]);
+    }
+
+    /**
+     * Get the name of the caster class to use when casting from / to this cast target.
+     *
+     * @param  array<string, mixed>  $arguments
+     */
+    public static function castUsing(array $arguments): string
+    {
+        return MultiLanguageStringCast::class;
     }
 
     public static function setUseFallBackLocaleDefault(bool $enable): void
