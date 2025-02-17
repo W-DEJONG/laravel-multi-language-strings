@@ -1,5 +1,5 @@
 {
-    "name": "w-dejong/laravel-multi-language-strings",
+    "name": "dejodev/laravel-multi-language-strings",
     "description": "Laravel Package that adds a Multilanguage string class and an Attribute cast for adding language support to Models.",
     "type": "library",
     "keywords": [
