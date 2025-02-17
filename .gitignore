@@ -31,3 +31,4 @@ Homestead.json
 auth.json
 /build
 .idea
+composer.lock

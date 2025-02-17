@@ -3,7 +3,7 @@
 use DeJoDev\MultiLanguageStrings\MultiLanguageString;
 
 it('Can instantiate a MultiLanguageString', function () {
-    $langStr = new MultiLanguageString('Hello World!');
+    $langStr = MultiLanguageString::create('Hello World!');
     expect($langStr)
         ->toBeInstanceOf(MultiLanguageString::class)
         ->and((string) $langStr)
