@@ -30,6 +30,15 @@ class MultiLanguageStringCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
+        if (is_string($value)) {
+            $instance = array_key_exists($key, $attributes)
+                ? MultiLanguageString::fromJson($attributes[$key])
+                : MultiLanguageString::create();
+            $instance->set($value);
+
+            return $instance->toJson();
+        }
+
         if (! $value instanceof MultiLanguageString) {
             throw new InvalidArgumentException('The given value is not a MultiLanguageString instance.');
         }
