@@ -145,7 +145,6 @@ MultiLanguageString::setUseFallBackLocaleDefault(false);
 // Get the default value for the `useFallbackLocale` property.
 $default = MultiLanguageString::getUseFallBackLocaleDefault();
 
-
 // Gets the locale that is used to get the value, using the fallback locale when enabled.
 $locale = $mls->getUsedLocale(): string;
 $locale = $mls->getUsedLocale('nl'): string;
