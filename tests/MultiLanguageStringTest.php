@@ -86,11 +86,11 @@ it('Can set the default use of a fallback locale', function () {
 it('Can transform a MultiLanguageString to JSON', function () {
     $langStr = new MultiLanguageString(['en' => 'Hello World!', 'nl' => 'Hallo Wereld']);
     expect($langStr->toJson())
-        ->toBe('{"multi-lang":{"en":"Hello World!","nl":"Hallo Wereld"}}');
+        ->toBe('{"en":"Hello World!","nl":"Hallo Wereld"}');
 });
 
 it('Can transform a JSON string to a MultiLanguageString', function () {
-    $langStr = MultiLanguageString::fromJson('{"multi-lang":{"en":"Hello World!","nl":"Hallo Wereld"}}');
+    $langStr = MultiLanguageString::fromJson('{"en":"Hello World!","nl":"Hallo Wereld"}');
     expect($langStr->get('nl'))
         ->toBe('Hallo Wereld')
         ->and($langStr->get('en'))
@@ -103,5 +103,5 @@ it('Can transform a JSON string to a MultiLanguageString', function () {
 });
 
 it('Throws an exception when JSON is invalid', function () {
-    MultiLanguageString::fromJson('{"en":"Hello World!","nl":"Hallo Wereld"}');
+    MultiLanguageString::fromJson('{"en":1,"nl":"Hallo Wereld"}');
 })->throws(InvalidArgumentException::class);

@@ -41,7 +41,7 @@ final class MultiLanguageString implements Castable, Stringable
         }
 
         $values = json_decode($json, true);
-        if ($values = $values['multi-lang'] ?? null) {
+        if (self::isKeyValueArray($values)) {
             return new self($values);
         }
 
@@ -53,7 +53,7 @@ final class MultiLanguageString implements Castable, Stringable
      */
     public function toJson(): string
     {
-        return json_encode(['multi-lang' => $this->values]);
+        return json_encode($this->values);
     }
 
     /**
@@ -131,7 +131,7 @@ final class MultiLanguageString implements Castable, Stringable
     {
         if (is_string($value)) {
             $this->values[$locale ?? app()->getLocale()] = $value;
-        } elseif ($this->isKeyValueArray($value)) {
+        } elseif (self::isKeyValueArray($value)) {
             $this->values = $value;
         } else {
             throw new InvalidArgumentException('Value must be a string or an associative array');
@@ -177,8 +177,12 @@ final class MultiLanguageString implements Castable, Stringable
     /**
      * Check if the given array is a valid array.
      */
-    private function isKeyValueArray(array $array): bool
+    private static function isKeyValueArray(mixed $array): bool
     {
+        if (! is_array($array)) {
+            return false;
+        }
+
         foreach ($array as $key => $value) {
             if (! is_string($key) || ! is_string($value)) {
                 return false;

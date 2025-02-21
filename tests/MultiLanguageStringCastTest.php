@@ -104,6 +104,20 @@ it('Throws an exception when the database column is not a JSON string', function
     $price = $failure->price;
 })->throws(InvalidArgumentException::class);
 
+it('Can set a multilanguage string field with a MultiLanguageString instance', function () {
+    $product = Product::create([
+        'sku' => '123456',
+        'productName' => 'Product Name',
+        'price' => 1000,
+    ]);
+    $product->productDescription = MultiLanguageString::create([
+        'en' => 'Product Description',
+        'es' => 'Descripción del Producto',
+    ]);
+    expect($product->productDescription)->toBeInstanceOf(MultiLanguageString::class)
+        ->and($product->productDescription->get())->toBe('Product Description');
+});
+
 it('Can set a multilanguage string field with a string assignment', function () {
     $product = Product::create([
         'sku' => '123456',
